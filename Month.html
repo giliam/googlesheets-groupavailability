@@ -1,0 +1,43 @@
+<? //<h3>Check month availabilities</h3>
+//<input type="button" value="Launch it" onclick="google.script.run.checkMonth();" /> ?>
+
+<h3>Available today?</h3>
+<p>
+<select id="support_member">
+<? var data = getSupportMembers();
+  for (var i = 0; i < data.length; i++) { ?>
+    <option value="<?= data[i] ?>"><?= data[i] ?></option>
+<? } ?>
+</select>
+</p>
+<input type="button" value="YES" onclick="google.script.run.available(true,document.getElementById('support_member').value,false);"  /><input type="button" value="NO" onclick="google.script.run.available(false,document.getElementById('support_member').value,false);" />
+
+<h3>Available tomorrow?</h3>
+<p>
+<select id="support_member_tomorrow">
+<? var data = getSupportMembers();
+  for (var i = 0; i < data.length; i++) { ?>
+    <option value="<?= data[i] ?>"><?= data[i] ?></option>
+<? } ?>
+</select>
+</p>
+<input type="button" value="YES" onclick="google.script.run.available(true,document.getElementById('support_member_tomorrow').value,true);"  /><input type="button" value="NO" onclick="google.script.run.available(false,document.getElementById('support_member_tomorrow').value,true);" />
+
+<h3>Add a new month</h3>
+<p><label for="month">Month: </label>
+<select id="month">
+<? var months = getMonths();
+  for (var i = 0; i < months.length; i++) { ?>
+    <option value="<?= i ?>" <? if((i-1) == getCurrentMonth()) { ?>selected="true"<? } ?>><?= months[i] ?></option>
+<? } ?>
+</select>
+</p>
+<p><label for="year">Year: </label>
+<select id="year">
+<? var years = getYears();
+  for (var i = 0; i < years.length; i++) { ?>
+    <option value="<?= years[i] ?>"><?= years[i] ?></option>
+<? } ?>
+</select>
+</p>
+<p><input type="submit" value="Add it" onclick="google.script.run.createNewMonth(document.getElementById('month').value,document.getElementById('year').value);" /></p>
