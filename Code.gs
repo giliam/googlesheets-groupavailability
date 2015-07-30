@@ -311,7 +311,11 @@ function checkMonth()
  */
 function checkToday()
 {
-  Logger.log("Checking today availability."); 
+  Logger.log("Checking today availability.");
+  var today = new Date();
+  var day = today.getDate();
+  var month = today.getMonth();
+  var year = today.getFullYear();
   checkDay(year,month,day);
 }
 
