@@ -256,11 +256,13 @@ function createNewMonth(month,year) {
     if( month ==1 && isBissextile(year)) { // if the year is bissextile
       n_days++;
     }
+    var d = new Date(year,month,1);
     for(var i=1;i<=n_days;i++)
     {
       var n = i+1;
       var cell = new_active.getRange("A" + n.toString());
-      cell.setValue(i);
+      cell.setValue(CAL_DAYS_LABEL[d.getDay()] + " " + i);
+      d.setDate(d.getDate()+1);
       range_defaults_values.copyTo(new_active.getRange("B" + n.toString()));
     }
   }
@@ -311,7 +313,7 @@ function checkMonth()
  */
 function checkToday()
 {
-  Logger.log("Checking today availability.");
+  Logger.log("Checking today availability."); 
   var today = new Date();
   var day = today.getDate();
   var month = today.getMonth();
